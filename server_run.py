@@ -6,7 +6,7 @@ from libs.server_utils import create_response_message
 if __name__ == '__main__':
     if '-ip' in sys.argv:
         try:
-            host_ip = sys.argv[sys.argv.index('-ip') + 2]
+            host_ip = sys.argv[sys.argv.index('-ip') + 1]
         except IndexError:
             print('Run script with non-default args "server_run -ip IP -p PORT"')
             sys.exit(0)
@@ -14,7 +14,7 @@ if __name__ == '__main__':
         host_ip = IP
     if '-p' in sys.argv:
         try:
-            host_port = int(sys.argv[sys.argv.index('-p') + 2])
+            host_port = int(sys.argv[sys.argv.index('-p') + 1])
         except IndexError:
             print('Run script with non-default args "server_run -ip IP -p PORT"')
             sys.exit(0)

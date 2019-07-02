@@ -7,7 +7,7 @@ from libs.jim_utils import get_message, send_message
 if __name__ == '__main__':
     if '-ip' in sys.argv:
         try:
-            server_ip = sys.argv[sys.argv.index('-ip') + 2]
+            server_ip = sys.argv[sys.argv.index('-ip') + 1]
         except IndexError:
             print('Run script with non-default args "client_run -ip IP -p PORT"')
             sys.exit(0)
@@ -15,7 +15,7 @@ if __name__ == '__main__':
         server_ip = 'localhost'
     if '-p' in sys.argv:
         try:
-            server_port = int(sys.argv[sys.argv.index('-p') + 2])
+            server_port = int(sys.argv[sys.argv.index('-p') + 1])
         except IndexError:
             print('Run script with non-default args "client_run -ip IP -p PORT"')
             sys.exit(0)
