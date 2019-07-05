@@ -5,6 +5,10 @@ from libs.jim_utils import get_message, send_message
 
 
 if __name__ == '__main__':
+    '''
+    Main client run script.
+    Takes args from system start script.
+    '''
     if '-ip' in sys.argv:
         try:
             server_ip = sys.argv[sys.argv.index('-ip') + 1]

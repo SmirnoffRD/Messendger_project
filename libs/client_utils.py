@@ -24,7 +24,7 @@ def read_presence_message(message):
         raise NoActionCode
     response_code = message[RESPONSE]
     if len(str(response_code)) != 3:
-        raise WrongResponseCodeLength(response_code)
+        raise WrongResponseCodeLength()
     if response_code not in CODES_TUPLE:
-        raise WrongResponseCode(response_code)
+        raise WrongResponseCode
     print(f'Response = {message}, status = connected')
