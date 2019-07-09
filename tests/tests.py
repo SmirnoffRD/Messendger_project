@@ -1,9 +1,15 @@
-import unittest, json
+import unittest
+import json
+import sys
+import os
 from libs import consts
 from libs.server_utils import create_response_message
 from libs.client_utils import create_presence_message, read_presence_message
 from libs.errors import ToLongUserName, NoActionCode, WrongResponseCodeLength, WrongResponseCode
 from libs.jim_utils import send_message
+
+sys.path.append(os.path.join(os.getcwd(), '..'))
+
 
 class TestServerCreateResponse(unittest.TestCase):
     def test_action_time(self):
@@ -12,18 +18,21 @@ class TestServerCreateResponse(unittest.TestCase):
             consts.TIME: 0.2,
             consts.USER: {'account_name': 'Jhon'}}),
             {consts.RESPONSE: 200})
+
     def test_time_type(self):
         with self.assertRaises(TypeError):
             create_response_message({
                 consts.ACTION: consts.PRESENCE,
                 consts.TIME: 22,
                 consts.USER: {'account_name': 'Jhon'}})
+
     def test_action_tipe(self):
         self.assertEqual(create_response_message({
                 consts.ACTION: consts.RESPONSE,
                 consts.TIME: 222,
                 consts.USER: {'account_name': 'Jhon'}}),
             {consts.RESPONSE: 400, consts.ERROR: 'Не верный запрос'})
+
 
 class TestClientCreatePresence(unittest.TestCase):
     def test_account_type(self):
@@ -33,6 +42,7 @@ class TestClientCreatePresence(unittest.TestCase):
     def test_account_length(self):
         with self.assertRaises(ToLongUserName):
             create_presence_message('jhuiiuhygiyggigy7gg8gi76gg6itgg6ytgyk')
+
 
 class TestClientReadPresence(unittest.TestCase):
     def test_response_in_message(self):
@@ -46,6 +56,7 @@ class TestClientReadPresence(unittest.TestCase):
     def test_response_code_valid(self):
         with self.assertRaises(WrongResponseCode):
             read_presence_message({consts.RESPONSE: 343})
+
 
 class TestJIMUtils(unittest.TestCase):
     message = ''
