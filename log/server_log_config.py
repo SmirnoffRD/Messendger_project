@@ -1,16 +1,16 @@
 import logging
 import logging.handlers
 import os
-import datetime
+import sys
 
 LOG_FOLDER_PATH = os.path.dirname(os.path.abspath(__file__))
-SERVER_LOG_FILE_PATH = os.path.join(LOG_FOLDER_PATH, f'server.log.{datetime.datetime.now().strftime("%Y_%m_%d")}')
+SERVER_LOG_FILE_PATH = os.path.join(LOG_FOLDER_PATH, 'server.log')
 
 server_logger = logging.getLogger('server')
 
 server_handler = logging.handlers.TimedRotatingFileHandler(SERVER_LOG_FILE_PATH, when='d')
 
-formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(module)s - %(message)s")
+formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 
 server_handler.setFormatter(formatter)
 
