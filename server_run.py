@@ -1,4 +1,5 @@
-import socket, sys
+import socket
+import sys
 from libs.consts import *
 from libs.jim_utils import get_message, send_message
 from libs.server_utils import create_response_message

@@ -1,5 +1,6 @@
-from libs.consts import CODES_TUPLE
 # Project exceptions
+
+
 class WrongResponseCode(Exception):
     """
     Extra exception class for wrong code
@@ -27,6 +28,7 @@ class ToLongUserName(Exception):
 
     def __str__(self):
         return 'Username is too long'
+
 
 class NoActionCode(Exception):
     """

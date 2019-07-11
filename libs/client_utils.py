@@ -3,11 +3,14 @@ from libs.errors import ToLongUserName, WrongResponseCodeLength, NoActionCode, W
 from libs.consts import RESPONSE, CODES_TUPLE, ACTION, TIME, USER, PRESENCE
 import logging
 import log.client_log_config
+from log.decorators import LoggerDeco
 
-#Getting logger object for client
+# Getting logger object for client
 logger = logging.getLogger('client')
 
-def create_presence_message(account = 'Guest'):
+
+@LoggerDeco(logger)
+def create_presence_message(account='Guest'):
     if isinstance(account, str):
         if len(account) > 25:
             raise ToLongUserName(account)
@@ -25,6 +28,7 @@ def create_presence_message(account = 'Guest'):
         raise TypeError
 
 
+@LoggerDeco(logger)
 def read_presence_message(message):
     if RESPONSE not in message:
         raise NoActionCode
@@ -33,6 +37,4 @@ def read_presence_message(message):
         raise WrongResponseCodeLength()
     if response_code not in CODES_TUPLE:
         raise WrongResponseCode
-    res = 'sever presence message: {}'.format(message)
-    logger.info('{} - {} - {}'.format(res, read_presence_message.__name__, __name__))
     print(f'Response = {message}, status = connected')

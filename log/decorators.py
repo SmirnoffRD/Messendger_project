@@ -1,5 +1,6 @@
 from functools import wraps
 
+
 class LoggerDeco:
 
     def __init__(self, logger):
