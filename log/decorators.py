@@ -10,7 +10,7 @@ class LoggerDeco:
 
         @wraps(func)
         def decorated(*args, **kwargs):
-            message = 'Функция {} вызвана из {}'.format(decorated.__name__, decorated.__module__)
+            message = 'Function {} called from {} '.format(decorated.__name__, decorated.__module__)
             result = func(*args, **kwargs)
             if args:
                 message += f'args: {args},'
@@ -19,5 +19,6 @@ class LoggerDeco:
             if result:
                 message += f'result: {result}'
             self.logger.info(message)
+            return result
 
         return decorated
