@@ -9,6 +9,10 @@ logger = logging.getLogger('server')
 
 @LoggerDeco(logger)
 def create_response_message(client_presence_message):
+    """
+    :param client_presence_message:
+    :return:
+    """
     if client_presence_message[ACTION] == PRESENCE and \
                     TIME in client_presence_message:
         if isinstance(client_presence_message[TIME], float):
