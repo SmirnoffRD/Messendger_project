@@ -1,8 +1,13 @@
-import sys, socket
+import sys, socket, threading
 from libs.consts import PORT
 from libs.client_utils import create_presence_message, read_presence_message
 from libs.jim_utils import get_message, send_message
 
+
+def read_mess(server):
+    while True:
+        message = server.recv(1024).decode("UTF-8")
+        print(f'Message: {message}\n')
 
 if __name__ == '__main__':
     '''
@@ -39,13 +44,8 @@ if __name__ == '__main__':
     send_message(client, presence)
     presence_answer = get_message(client)
     read_presence_message(presence_answer)
+    reading_thread = threading.Thread(target=read_mess, args=(client,))
+    reading_thread.start()
     while True:
-        if r:
-            mess = client.recv(1024).decode('UTF-8')
-            print(mess)
-        elif w:
-            mess = client.send(input('Input your message: ').encode('UTF-8'))
-        else:
-            client.close()
-            break
-
+        mess = input('Input your message: ')
+        client.send(mess.encode('UTF-8'))
