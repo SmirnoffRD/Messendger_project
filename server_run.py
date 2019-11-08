@@ -1,7 +1,6 @@
 import socket
 import sys
 import select
-import time
 from libs.consts import *
 from libs.jim_utils import get_message, send_message
 from libs.server_utils import create_response_message
@@ -50,11 +49,8 @@ if __name__ == '__main__':
         finally:
             r = []
             w = []
-            print(clients)
             try:
                 r, w, e = select.select(clients, clients, [], 10)
-                print(w)
-                print(r)
             except:
                 pass
             messages = []

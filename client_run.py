@@ -1,6 +1,9 @@
-import sys, socket, threading
-from libs.consts import PORT
+import socket
+import sys
+import threading
+
 from libs.client_utils import create_presence_message, read_presence_message
+from libs.consts import PORT
 from libs.jim_utils import get_message, send_message
 
 
@@ -8,6 +11,7 @@ def read_mess(server):
     while True:
         message = server.recv(1024).decode("UTF-8")
         print(f'Message: {message}\n')
+
 
 if __name__ == '__main__':
     '''
@@ -36,7 +40,6 @@ if __name__ == '__main__':
         r = True
     if 'w' in sys.argv:
         w = True
-
 
     client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     client.connect((server_ip, server_port))
